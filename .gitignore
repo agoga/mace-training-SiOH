@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment
+.env
+.venv
+env/
+build/
+dist/
+*.egg-info/
+
+# Output
+mace_training_data.xyz
+
+# VSCode
+.vscode/
+
+# Training data (ignore all except a few samples for mace-training-SiOH)
+collected_inputs_outputs/*
+!collected_inputs_outputs/H2O__ortho.02x01x01__01.scale_pert__sys-0032-0016__scale-0.980__000000__H2O.in
+!collected_inputs_outputs/H2O__ortho.02x01x01__01.scale_pert__sys-0032-0016__scale-0.980__000000__H2O.out
+!collected_inputs_outputs/H2O__ortho.02x01x01__01.scale_pert__sys-0032-0016__scale-0.980__000001__H2O.in
+!collected_inputs_outputs/H2O__ortho.02x01x01__01.scale_pert__sys-0032-0016__scale-0.980__000001__H2O.out
+!collected_inputs_outputs/H2O__ortho.02x01x01__01.scale_pert__sys-0032-0016__scale-0.980__000002__H2O.in
+!collected_inputs_outputs/H2O__ortho.02x01x01__01.scale_pert__sys-0032-0016__scale-0.980__000002__H2O.out
