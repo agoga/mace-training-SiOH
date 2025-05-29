@@ -25,3 +25,7 @@ collected_inputs_outputs/*
 !collected_inputs_outputs/H2O__ortho.02x01x01__01.scale_pert__sys-0032-0016__scale-0.980__000001__H2O.out
 !collected_inputs_outputs/H2O__ortho.02x01x01__01.scale_pert__sys-0032-0016__scale-0.980__000002__H2O.in
 !collected_inputs_outputs/H2O__ortho.02x01x01__01.scale_pert__sys-0032-0016__scale-0.980__000002__H2O.out
+
+dpmd/
+init/
+pseudo/

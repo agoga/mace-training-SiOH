@@ -1,0 +1,5 @@
+from ase.io import read, write
+
+# Read the first 100 structures from the full training set
+all_structures = read('mace_training_data.xyz', ':')
+write('mace_training_data_small.xyz', all_structures[:100])
