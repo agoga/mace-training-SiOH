@@ -12,6 +12,7 @@ dist/
 *.egg-info/
 
 # Output
+*.log
 
 # VSCode
 .vscode/
