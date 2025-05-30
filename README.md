@@ -1,6 +1,6 @@
 # mace-training-SIOH
 
-This repository by [agoga](https://github.com/agoga) demonstrates a real-world workflow for preparing and (soon) training machine learning interatomic potentials (MACE) for SiOH systems, using Quantum ESPRESSO DFT calculations as the data source.
+This repository demonstrates a real-world workflow for preparing and (soon) training machine learning interatomic potentials (MACE) for SiOH systems, using Quantum ESPRESSO DFT calculations as the data source.
 
 ## Overview
 - **Collects** all Quantum ESPRESSO `.in` and `.out` files from a project.
