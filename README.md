@@ -25,8 +25,36 @@ This repository is a **work in progress**. Currently, it provides:
    python qe2mace.py
    ```
    This produces `mace_training_data.xyz`.
-3. **(Planned) Train MACE Potential:**
-   - Scripts and instructions for training with MACE will be added soon.
+3. **Train MACE Potential:**
+   Example command with recommended settings for Si/O/H systems:
+   ```bash
+   python train_mace.py
+   # or, if running directly:
+   mace_run_train \
+     --model MACE \
+     --train_file mace_training_data.xyz \
+     --valid_file mace_training_data.xyz \
+     --energy_weight 1.0 \
+     --forces_weight 100.0 \
+     --max_num_epochs 50 \
+     --batch_size 1 \
+     --device cuda \
+     --work_dir mace_model_output \
+     --name SiOH-test \
+     --E0s '{1: -13.6, 8: -204.0, 14: -290.0}' \
+     --num_workers 0 \
+     --pin_memory False \
+     --valid_batch_size 1 \
+     --num_channels 128 \
+     --num_interactions 4 \
+     --max_L 1 \
+     --r_max 6.0 \
+     --lr 0.001 \
+     --ema_decay 0.99 \
+     --scheduler ReduceLROnPlateau \
+     --seed 42
+   ```
+   These settings are based on best practices for Si/O/H systems (crystalline/amorphous Si, SiO₂, SiOx, H-containing) and are memory-friendly for most GPUs.
 4. **(Planned) Validate and Use Potential:**
    - Example scripts for validation and deployment will be provided.
 
