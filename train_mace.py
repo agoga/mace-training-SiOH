@@ -49,21 +49,20 @@ print(f"Training MACE model on {len(structures)} structures using {train_params[
 # Build the CLI command with memory-friendly settings
 command = [
     "mace_run_train",
-    "--model", "MACE",
+    "--model", train_params["model_type"],
     "--train_file", train_file,
     "--valid_file", train_file,
-    "--energy_weight", "1.0",
-    "--forces_weight", "100.0",
-    "--max_num_epochs", "50",
-    "--batch_size", "1",
-    "--device", "cuda",
+    "--energy_weight", str(train_params["energy_weight"]),
+    "--forces_weight", str(train_params["force_weight"]),
+    "--max_num_epochs", str(train_params["num_epochs"]),
+    "--batch_size", str(train_params["batch_size"]),  # ← fixed here
+    "--device", train_params["device"],
     "--work_dir", output_dir,
     "--name", "SiOH-test",
     "--E0s", "{1: -13.6, 8: -204.0, 14: -290.0}",
-    "--num_workers", "0",
-    "--pin_memory", "False",
-    "--valid_batch_size", "1",
-    # Higher settings for powerful GPUs:
+    "--num_workers", str(train_params["num_workers"]),
+    "--pin_memory", str(train_params["pin_memory"]),
+    "--valid_batch_size", str(train_params["valid_batch_size"]),
     "--num_channels", "256",
     "--num_interactions", "6",
     "--max_L", "2",
@@ -71,8 +70,9 @@ command = [
     "--lr", "0.001",
     "--ema_decay", "0.99",
     "--scheduler", "ReduceLROnPlateau",
-    "--seed", "42"
+    "--seed", str(train_params["seed"])
 ]
+
 
 subprocess.run(command, check=True)
 
