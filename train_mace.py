@@ -55,7 +55,7 @@ command = [
     "--energy_weight", "1.0",
     "--forces_weight", "100.0",
     "--max_num_epochs", "50",
-    "--batch_size", "1",  # Lowered for memory safety
+    "--batch_size", "1",
     "--device", "cuda",
     "--work_dir", output_dir,
     "--name", "SiOH-test",
@@ -63,11 +63,11 @@ command = [
     "--num_workers", "0",
     "--pin_memory", "False",
     "--valid_batch_size", "1",
-    # Recommended Si/O/H hyperparameters:
-    "--num_channels", "64",
-    "--num_interactions", "2",
-    "--max_L", "1",
-    "--r_max", "5.0",
+    # Higher settings for powerful GPUs:
+    "--num_channels", "256",
+    "--num_interactions", "6",
+    "--max_L", "2",
+    "--r_max", "6.0",
     "--lr", "0.001",
     "--ema_decay", "0.99",
     "--scheduler", "ReduceLROnPlateau",
