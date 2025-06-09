@@ -19,6 +19,8 @@ import re
 import numpy as np
 from ase import Atoms
 from ase.io import write
+import collections
+import random
 
 # Directory containing the collected files
 dirname = "collected_inputs_outputs"
@@ -129,6 +131,9 @@ def main():
     """
     Main routine: loops over all .in/.out pairs, parses data, and writes to extended XYZ.
     """
+    make_small_dataset = False  # Set to True to make a small, diverse dataset
+    small_dataset_size_per_type = 2  # Number of structures per unique formula
+
     xyz_structures = []
     in_files = sorted(glob.glob(os.path.join(dirname, '*.in')))
     print(f"Found {len(in_files)} .in files.")
@@ -142,9 +147,24 @@ def main():
         if not (cell and symbols and positions and energy is not None and forces):
             continue
         atoms = Atoms(symbols=symbols, positions=positions, cell=cell, pbc=True)
-        atoms.info['energy'] = energy
-        atoms.arrays['forces'] = np.array(forces)
+        atoms.info['REF_energy'] = energy
+        atoms.arrays['REF_forces'] = np.array(forces)
         xyz_structures.append(atoms)
+
+    if make_small_dataset:
+        # Group by chemical formula
+        grouped = collections.defaultdict(list)
+        for atoms in xyz_structures:
+            formula = atoms.get_chemical_formula(mode='hill')
+            grouped[formula].append(atoms)
+        # Sample up to N per formula
+        xyz_structures_small = []
+        for formula, group in grouped.items():
+            n = min(small_dataset_size_per_type, len(group))
+            xyz_structures_small.extend(random.sample(group, n))
+        xyz_structures = xyz_structures_small
+        print(f"Selected {len(xyz_structures)} structures for small dataset.")
+
     if xyz_structures:
         write(output_xyz, xyz_structures)
         print(f"Wrote {len(xyz_structures)} structures to {output_xyz}")

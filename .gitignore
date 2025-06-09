@@ -29,3 +29,7 @@ collected_inputs_outputs/*
 dpmd/
 init/
 pseudo/
+
+
+mace_model_output/
+mace_training_data.xyz

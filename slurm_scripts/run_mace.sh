@@ -14,13 +14,27 @@
 
 # Environment setup
 module purge
-module spider cuda 2>/dev/null | grep -q 11.8 && module load cuda/11.8 || echo "⚠️ cuda/11.8 not found, skipping module load"
 
+
+# Load the correct CUDA version
+if module avail cuda/12.4 &>/dev/null; then
+    module load cuda/12.4
+elif module avail cuda/11.8 &>/dev/null; then
+    module load cuda/11.8
+else
+    echo "❌ No suitable CUDA module found (need 11.8+). Aborting."
+    exit 1
+fi
+
+# Activate environment
 source ~/.bashrc
 conda activate mace
 
-# Optional: log GPU memory before start
+# Enable PyTorch memory expansion
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+
+# Log GPU info
 nvidia-smi
 
-# Run training script
+# Run training
 python train_mace.py
