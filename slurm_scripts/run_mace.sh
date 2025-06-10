@@ -17,14 +17,8 @@ module purge
 
 
 # Load the correct CUDA version
-if module avail cuda/12.4 &>/dev/null; then
-    module load cuda/12.4
-elif module avail cuda/11.8 &>/dev/null; then
-    module load cuda/11.8
-else
-    echo "❌ No suitable CUDA module found (need 11.8+). Aborting."
-    exit 1
-fi
+module load cuda/12.3
+
 
 # Activate environment
 source ~/.bashrc
